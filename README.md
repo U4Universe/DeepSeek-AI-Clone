@@ -1,5 +1,5 @@
-<h1>DeepSeek AI-Clone</h1>
-This project is a full-stack clone of DeepSeek AI, built to replicate its sleek user interface and intelligent chat-driven experience. The goal of this clone is to understand the architectural design of modern AI platforms, explore the integration of real-time messaging, and implement webhook-based user authentication using Clerk and Svix. Built with Next.js, Tailwind CSS, MongoDB, and Node.js, this clone serves as both a learning exercise and a foundation for expanding AI-driven interfaces in future projects. Whether you're exploring AI UX patterns or studying full-stack development, this repository offers a comprehensive deep dive into how DeepSeek-style platforms are structured under the hood.
+<h1>🧠 DeepSeek AI-Clone</h1>
+This project is a full-stack clone of DeepSeek AI, built to replicate its sleek user interface and intelligent chat-driven experience. The goal of this clone project is to understand the architectural design of modern AI platforms, explore the integration of real-time messaging, and implement webhook-based user authentication using Clerk and Svix. Built with Next.js, Tailwind CSS, MongoDB, and Node.js, this clone serves as both a learning exercise and a foundation for expanding AI-driven interfaces in future projects.
 
 ## Technical Infrastructure
 - **Frontend**
