@@ -10,21 +10,20 @@ const ChatLabel = ({ openMenu, setOpenMenu, id, name }) => {
 
   const selectChat = () => {
     const chatData = chats?.find((chat) => chat._id === id);
-    if (chatData) {
-      setSelectedChat(chatData);
-    } else {
+    if (!chatData) {
       toast.error("Chat not found.");
+      return;
     }
+    setSelectedChat(chatData);
   };
 
   const renameHandler = async () => {
     try {
-      const newName = prompt("Enter a new name for this chat:");
-      if (!newName) return;
-
+      const newName = prompt("Enter new chat name:");
+      if (!newName?.trim()) return;
       const { data } = await axios.post("/api/chat/rename", {
         chatId: id,
-        name: newName,
+        name: newName.trim(),
       });
 
       if (data.success) {
@@ -64,19 +63,18 @@ const ChatLabel = ({ openMenu, setOpenMenu, id, name }) => {
       className="flex items-center justify-between p-2 text-white/80 hover:bg-white/10 rounded-lg text-sm group cursor-pointer"
     >
       <p className="group-hover:max-w-[83.333333%] truncate">{name}</p>
+
       <div
         onClick={(e) => {
           e.stopPropagation();
-          setOpenMenu({ id: id, open: !openMenu.open });
+          setOpenMenu({ id, open: !openMenu.open || openMenu.id !== id });
         }}
         className="group relative flex items-center justify-center h-6 w-6 hover:bg-black/80 rounded-lg"
       >
         <Image
           src={assets.three_dots}
           alt="three dots"
-          className={`w-4 ${
-            openMenu.id === id && openMenu.open ? "" : "hidden"
-          } group-hover:block`}
+          className={`w-4 ${openMenu.id === id && openMenu.open ? "" : "hidden"} group-hover:block`}
         />
         <div
           className={`absolute ${
@@ -85,14 +83,14 @@ const ChatLabel = ({ openMenu, setOpenMenu, id, name }) => {
         >
           <div
             onClick={renameHandler}
-            className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg"
+            className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg cursor-pointer"
           >
             <Image src={assets.pencil_icon} alt="pencil icon" className="w-4" />
             <p>Rename</p>
           </div>
           <div
             onClick={deleteHandler}
-            className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg"
+            className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg cursor-pointer"
           >
             <Image src={assets.delete_icon} alt="delete icon" className="w-4" />
             <p>Delete</p>
