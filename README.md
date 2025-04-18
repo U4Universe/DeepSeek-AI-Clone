@@ -30,19 +30,19 @@ This project is a full-stack clone of DeepSeek AI, built to replicate its sleek 
 
 ## ⚙️ Key Features
 
-- **AI-Driven Conversations**
+- **AI-Driven Conversations:**
 Seamlessly interact with an intelligent AI model capable of processing user prompts and delivering contextual responses.
 
-- **Chat Session Management**
+- **Chat Session Management:**
 Users can efficiently manage their conversations with the ability to rename or delete chat threads as needed.
 
-- **Dynamic Real-Time Interface**
+- **Dynamic Real-Time Interface:**
 Chat messages are updated instantly within the user interface, ensuring a smooth and uninterrupted experience.
 
-- **Secure User Authentication**
+- **Secure User Authentication:**
 Implements a robust authentication system to manage user sessions and protect access to personal data.
 
-- **Fully Responsive Design**
+- **Fully Responsive Design:**
 Optimized layout and user experience across all screen sizes, including desktops, tablets, and mobile devices.
 
 
