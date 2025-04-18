@@ -46,3 +46,10 @@ deepseek-clone/
 │   └── globals.css              # Global styles
 └── README.md                    # Project documentation
 ```
+
+## NEXT.JS Installation
+1. Install NEXT.JS on cmd
+```bash
+npx create-next-app@latest
+```
+2. Install dependencies:
