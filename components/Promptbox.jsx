@@ -7,8 +7,7 @@ import toast from "react-hot-toast";
 
 const PromptBox = ({ isLoading, setIsLoading }) => {
   const [prompt, setPrompt] = useState("");
-  const { user, chats, setChats, selectedChat, setSelectedChat } =
-    useAppContext();
+  const { user, chats, setChats, selectedChat, setSelectedChat } = useAppContext();
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -18,36 +17,31 @@ const PromptBox = ({ isLoading, setIsLoading }) => {
   };
 
   const sendPrompt = async (e) => {
-    const promptCopy = prompt;
+    e.preventDefault();
+    const promptCopy = prompt.trim();
+    if (!promptCopy) return;
 
     try {
-      e.preventDefault();
-      if (!user) return toast.error("Login to send message");
-      if (isLoading)
-        return toast.error("Wait for the previous prompt response");
+      if (!user) return toast.error("Please log in to send a message.");
+      if (isLoading) return toast.error("Please wait for the previous response.");
 
       setIsLoading(true);
       setPrompt("");
 
       const userPrompt = {
         role: "user",
-        content: prompt,
+        content: promptCopy,
         timestamp: Date.now(),
       };
 
-      // Saving user prompt in chats array
       setChats((prevChats) =>
         prevChats.map((chat) =>
           chat._id === selectedChat._id
-            ? {
-                ...chat,
-                messages: [...chat.messages, userPrompt],
-              }
+            ? { ...chat, messages: [...chat.messages, userPrompt] }
             : chat
         )
       );
 
-      // Saving user prompt in selected chat
       setSelectedChat((prev) => ({
         ...prev,
         messages: [...prev.messages, userPrompt],
@@ -55,50 +49,51 @@ const PromptBox = ({ isLoading, setIsLoading }) => {
 
       const { data } = await axios.post("/api/chat/ai", {
         chatId: selectedChat._id,
-        prompt,
+        prompt: promptCopy,
       });
 
       if (data.success) {
-        setChats((prevChats) =>
-          prevChats.map((chat) =>
-            chat._id === selectedChat._id
-              ? { ...chat, messages: [...chat.messages, data.data] }
-              : chat
-          )
-        );
-
-        const message = data.data.content;
-        const messageTokens = message.split(" ");
-        let assistantMessage = {
+        const fullMessage = data.data.content;
+        const messageTokens = fullMessage.split(" ");
+        const assistantMessage = {
           role: "assistant",
           content: "",
           timestamp: Date.now(),
         };
 
-        setSelectedChat((prev) => ({
-          ...prev,
-          messages: [...prev.messages, assistantMessage],
-        }));
+        let runningContent = "";
 
         for (let i = 0; i < messageTokens.length; i++) {
-          setTimeout(() => {
-            assistantMessage.content = messageTokens.slice(0, i + 1).join(" ");
-            setSelectedChat((prev) => {
-              const updatedMessages = [
-                ...prev.messages.slice(0, -1),
-                assistantMessage,
-              ];
+          await new Promise((res) => setTimeout(res, 100));
+          runningContent = messageTokens.slice(0, i + 1).join(" ");
 
-              return { ...prev, messages: updatedMessages };
-            });
-          }, i * 100);
+          setSelectedChat((prev) => {
+            const updatedMessages = [...prev.messages];
+            if (updatedMessages[updatedMessages.length - 1]?.role === "assistant") {
+              updatedMessages[updatedMessages.length - 1].content = runningContent;
+            } else {
+              updatedMessages.push({ ...assistantMessage, content: runningContent });
+            }
+            return { ...prev, messages: updatedMessages };
+          });
         }
+
+        setChats((prevChats) =>
+          prevChats.map((chat) =>
+            chat._id === selectedChat._id
+              ? {
+                  ...chat,
+                  messages: [...chat.messages, { ...assistantMessage, content: fullMessage }],
+                }
+              : chat
+          )
+        );
       } else {
-        toast.error(data.message);
+        toast.error(data.message || "Something went wrong.");
         setPrompt(promptCopy);
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message || error.message);
       setPrompt(promptCopy);
     } finally {
       setIsLoading(false);
@@ -114,7 +109,7 @@ const PromptBox = ({ isLoading, setIsLoading }) => {
     >
       <textarea
         onKeyDown={handleKeyDown}
-        className="outline-none w-full resize-none overflow-hidden break-words bg-transparent"
+        className="outline-none w-full resize-none overflow-hidden break-words bg-transparent text-white"
         rows={2}
         placeholder="Message DeepSeek"
         required
@@ -122,14 +117,10 @@ const PromptBox = ({ isLoading, setIsLoading }) => {
         value={prompt}
       />
 
-      <div className="flex items-center justify-between text-sm">
+      <div className="flex items-center justify-between text-sm mt-2">
         <div className="flex items-center gap-2">
           <p className="flex items-center gap-2 text-xs border border-gray-300/40 px-2 py-1 rounded-full cursor-pointer hover:bg-gray-500/20 transition">
-            <Image
-              className="h-5"
-              src={assets.deepthink_icon}
-              alt="deepthink icon"
-            />
+            <Image className="h-5" src={assets.deepthink_icon} alt="deepthink icon" />
             DeepThink (R1)
           </p>
           <p className="flex items-center gap-2 text-xs border border-gray-300/40 px-2 py-1 rounded-full cursor-pointer hover:bg-gray-500/20 transition">
@@ -139,20 +130,18 @@ const PromptBox = ({ isLoading, setIsLoading }) => {
         </div>
 
         <div className="flex items-center gap-2">
-          <Image
-            className="w-4 cursor-pointer"
-            src={assets.pin_icon}
-            alt="pin icon"
-          />
+          <Image className="w-4 cursor-pointer" src={assets.pin_icon} alt="pin icon" />
           <button
+            type="submit"
+            disabled={!prompt.trim() || isLoading}
             className={`${
-              prompt ? "bg-primary" : "bg-[#71717a]"
+              prompt.trim() && !isLoading ? "bg-primary" : "bg-[#71717a]"
             } rounded-full p-2 cursor-pointer`}
           >
             <Image
               className="w-3.5 aspect-square"
-              src={prompt ? assets.arrow_icon : assets.arrow_icon_dull}
-              alt={prompt ? "arrow icon" : "arrow icon dull"}
+              src={prompt.trim() && !isLoading ? assets.arrow_icon : assets.arrow_icon_dull}
+              alt="send icon"
             />
           </button>
         </div>
