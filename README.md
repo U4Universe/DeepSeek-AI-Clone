@@ -47,9 +47,27 @@ deepseek-clone/
 └── README.md                    # Project documentation
 ```
 
-## NEXT.JS Installation
-1. Install NEXT.JS on cmd
+## Packages Installation & Project Setup
+1. Install NEXT.js on cmd
 ```bash
 npx create-next-app@latest
 ```
 2. Install dependencies:
+```bash
+npm i axios mongoose openai svix prismjs react-hot-toast react-markdown
+```
+3. Set up environment variables: Create a .env file in the root directory and add the following:
+```bash
+MONGO_URI=your-mongodb-connection-string
+SIGNING_SECRET=your-svix-signing-secret
+CLERK_SECRET_KEY=your-clerk-secret-key
+DEEPSEEK_API_KEY=your-deepseek-api-key
+```
+4. Run the development server:
+```bash
+npm run dev
+```
+5. Open the application in your browser:
+```bash
+http://localhost:3000
+```
