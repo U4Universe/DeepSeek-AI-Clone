@@ -30,11 +30,22 @@ This project is a full-stack clone of DeepSeek AI, built to replicate its sleek 
 
 ## ⚙️ Key Features
 
-- Intuitive UI inspired by DeepSeek
-- Realtime webhook event handling
-- Custom user onboarding flow
-- Syntax-highlighted code block support
-- Fully responsive and accessible
+- **AI-Driven Conversations**
+Seamlessly interact with an intelligent AI model capable of processing user prompts and delivering contextual responses.
+
+- **Chat Session Management**
+Users can efficiently manage their conversations with the ability to rename or delete chat threads as needed.
+
+- **Dynamic Real-Time Interface**
+Chat messages are updated instantly within the user interface, ensuring a smooth and uninterrupted experience.
+
+- **Secure User Authentication**
+Implements a robust authentication system to manage user sessions and protect access to personal data.
+
+- **Fully Responsive Design**
+Optimized layout and user experience across all screen sizes, including desktops, tablets, and mobile devices.
+
+
 
 ## 📁 DeepSeek AI-Clone Folder Structure
 ```bash
