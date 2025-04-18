@@ -22,23 +22,27 @@ deepseek-clone/
 |    ├── globals.css      # globals css endpoint
 ├── api/
 │   ├── chat/
-│   │   │   ├── ai/         # AI chat endpoint
-│   │   │   ├── rename/     # Rename chat endpoint
-│   │   │   └── delete/     # Delete chat endpoint
-│   └── clerk/              # Clerk webhook integration
+│   │   │   ├── ai/              # AI chat endpoint
+|   |   |   |    └── route.js    # AI routejs endpoint
+│   │   │   ├── rename/          # Rename chat endpoint
+|   |   |   |    └── route.js    # Rename routejs endpoint
+│   │   │   └── delete/          # Delete chat endpoint
+|   |   |   |    └── route.js    # Delete routejs endpoint
+│   └── clerk/                   # Clerk webhook integration
+|   |   |   └── route.js         # Clerk routejs endpoint
 ├── components/
-│   ├── ChatLabel.jsx       # Chat label component
-│   ├── PromptBox.jsx       # Chat input box component
-│   └── Sidebar.jsx         # Sidebar for chat navigation
+│   ├── ChatLabel.jsx            # Chat label component
+│   ├── PromptBox.jsx            # Chat input box component
+│   └── Sidebar.jsx              # Sidebar for chat navigation
 ├── context/
-│   └── AppContext.jsx      # Global state management
+│   └── AppContext.jsx           # Global state management
 ├── config/
-│   └── db.js               # MongoDB connection configuration
+│   └── db.js                    # MongoDB connection configuration
 ├── models/
-│   └── User.js             # User model schema
+│   └── User.js                  # User model schema
 ├── public/
-│   └── assets/             # Static assets (icons, images)
+│   └── assets/                  # Static assets (icons, images)
 ├── styles/
-│   └── globals.css         # Global styles
-└── README.md               # Project documentation
+│   └── globals.css              # Global styles
+└── README.md                    # Project documentation
 ```
