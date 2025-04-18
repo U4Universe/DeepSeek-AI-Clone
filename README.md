@@ -25,7 +25,7 @@ This project is a full-stack clone of DeepSeek AI, built to replicate its sleek 
 - **Deployment**
   - Vercel
 
-  - **Notifications**
+- **Notifications**
   - React-hot-Toast
 
 ## ⚙️ Key Features
