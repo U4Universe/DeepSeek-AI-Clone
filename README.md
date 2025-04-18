@@ -1,16 +1,39 @@
 <h1>DeepSeek AI-Clone</h1>
 
-## Getting Started
-First, run the development server:
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technical Infrastructure
+- **Frontend**
+  - React.js
+  - Next.js
+  - Tailwind CSS
+
+- **Backend**
+  - Node.js
+  - Express.js
+
+- **Database**
+  - MongoDB
+  - Mongoose
+
+- **API Integration**
+  - Axios
+
+- **Authentication**
+  - Clerk
+  - Svix Webhooks
+
+- **Deployment**
+  - Vercel
+
+  - **Notifications**
+  - React-hot-Toast
+
+## Key Features
+
+- Intuitive UI inspired by DeepSeek
+- Realtime webhook event handling
+- Custom user onboarding flow
+- Syntax-highlighted code block support
+- Fully responsive and accessible
 
 ## DeepSeek AI-Clone Folder Structure
 ```bash
