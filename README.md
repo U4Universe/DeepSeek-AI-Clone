@@ -1,7 +1,7 @@
-<h1>🧠 DeepSeek AI-Clone</h1>
+<h1> 🧠 DeepSeek AI-Clone</h1>
 This project is a full-stack clone of DeepSeek AI, built to replicate its sleek user interface and intelligent chat-driven experience. The goal of this clone project is to understand the architectural design of modern AI platforms, explore the integration of real-time messaging, and implement webhook-based user authentication using Clerk and Svix. Built with Next.js, Tailwind CSS, MongoDB, and Node.js, this clone serves as both a learning exercise and a foundation for expanding AI-driven interfaces in future projects.
 
-## Technical Infrastructure
+## 🖥️ Technical Infrastructure
 - **Frontend**
   - React.js
   - Next.js
@@ -28,7 +28,7 @@ This project is a full-stack clone of DeepSeek AI, built to replicate its sleek 
   - **Notifications**
   - React-hot-Toast
 
-## Key Features
+## ⚙️ Key Features
 
 - Intuitive UI inspired by DeepSeek
 - Realtime webhook event handling
@@ -36,7 +36,7 @@ This project is a full-stack clone of DeepSeek AI, built to replicate its sleek 
 - Syntax-highlighted code block support
 - Fully responsive and accessible
 
-## DeepSeek AI-Clone Folder Structure
+## 📁 DeepSeek AI-Clone Folder Structure
 ```bash
 deepseek-clone/
 ├── app/
@@ -55,23 +55,23 @@ deepseek-clone/
 │   └── clerk/                   # Clerk webhook integration
 |   |   |   └── route.js         # Clerk routejs endpoint
 ├── components/
-│   ├── ChatLabel.jsx            # Chat label component
+|   ├── ChatLabel.jsx            # Chat label component
 │   ├── PromptBox.jsx            # Chat input box component
-│   └── Sidebar.jsx              # Sidebar for chat navigation
+|   └── Sidebar.jsx              # Sidebar for chat navigation
 ├── context/
-│   └── AppContext.jsx           # Global state management
+|   └── AppContext.jsx           # Global state management
 ├── config/
-│   └── db.js                    # MongoDB connection configuration
+|   └── db.js                    # MongoDB connection configuration
 ├── models/
-│   └── User.js                  # User model schema
+|   └── User.js                  # User model schema
 ├── public/
-│   └── assets/                  # Static assets (icons, images)
+|   └── assets/                  # Static assets (icons, images)
 ├── styles/
-│   └── globals.css              # Global styles
+|   └── globals.css              # Global styles
 └── README.md                    # Project documentation
 ```
 
-## Packages Installation & Project Setup
+## 📦 Packages Installation & Project Setup
 1. Install NEXT.js on cmd
 ```bash
 npx create-next-app@latest
