@@ -1,0 +1,141 @@
+pre[class*="language-"],
+code[class*="language-"] {
+  color: #e0e0e0;
+  font-size: 14px;
+  font-family: 'Fira Code', Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: break-word;
+  line-height: 1.6;
+  tab-size: 4;
+  hyphens: none;
+  background: #1b1f23;
+  border-radius: 8px;
+  overflow-x: auto;
+  padding: 1.2em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+:not(pre) > code[class*="language-"] {
+  padding: 0.15em 0.5em;
+  border-radius: 4px;
+  color: #ff79c6;
+  background: #141414;
+}
+
+pre[class*="language-"]::selection,
+code[class*="language-"]::selection,
+pre[class*="language-"] *::selection,
+code[class*="language-"] *::selection {
+  background: #264f78;
+  color: #ffffff;
+}
+
+@media print {
+  pre[class*="language-"],
+  code[class*="language-"] {
+    text-shadow: none;
+  }
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype {
+  color: #6a9955;
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: #d4d4d4;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f78c6c;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #c3e88d;
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+  color: #89ddff;
+}
+
+.token.atrule,
+.token.keyword,
+.token.control-flow {
+  color: #c792ea;
+}
+
+.token.function,
+.token.class-name {
+  color: #82aaff;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #f07178;
+}
+
+.token.parameter {
+  color: #9cdcfe;
+}
+
+.token.interpolation {
+  color: #e0af68;
+}
+
+.token.attr-value {
+  color: #ffcb6b;
+}
+
+.token.namespace {
+  color: #4ec9b0;
+}
+
+.token.console,
+.token.constant,
+.token.maybe-class-name {
+  color: #ffcb6b;
+}
+
+.token.escape,
+.token.keyword.module {
+  color: #c586c0;
+}
+
+.token.tag .token.punctuation {
+  color: #808080;
+}
+
+.language-css .token.string.url {
+  text-decoration: underline dotted;
+  color: #b3e5fc;
+}
+
+pre[class*="language-"] > code[class*="language-"] {
+  position: relative;
+  z-index: 1;
+}
+
+.line-highlight.line-highlight {
+  background: #3e4451;
+  box-shadow: inset 5px 0 0 #ffcb6b;
+  z-index: 0;
+}
