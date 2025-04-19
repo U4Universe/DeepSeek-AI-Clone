@@ -49,6 +49,17 @@ const Promptbox = ({ setIsLoading, isLoading }) => {
                             prompt ? 'bg-gradient-to-r from-[#5F5FFF] to-[#9F59FF]' : 'bg-[#71717a]'
                         }`}
                     >
+                        const handleSend = async () => {
+                        const res = await fetch("/api/chat/ai", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ prompt: input }),
+                    });
+
+                        const data = await res.json();
+                        setMessages([...messages, { role: "user", content: input }, { role: "assistant", content: data.response }]);
+                    };
+
                         <Image
                             className="w-4 aspect-square"
                             src={assets.arrow_icon}
