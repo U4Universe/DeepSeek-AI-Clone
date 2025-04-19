@@ -1,57 +1,27 @@
-export const maxDuration = 60;
-import connectDB from "@/config/db";
-import Chat from "@/models/Chat";
-import { getAuth } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
-import OpenAI from "openai";
-
-
-const openai = new OpenAI({
-  baseURL: "https://api.deepseek.com",
-  apiKey: process.env.DEEPSEEK_API_KEY,
-});
-
 export async function POST(req) {
-  try {
-    const { userId } = getAuth(req);
+  const { prompt } = await req.json();
 
-    
-    const { chatId, prompt } = await req.json();
+  const response = await fetch("https://api.deepseek.com/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.DEEPSEEK_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "deepseek-chat", // or "deepseek-coder" if you're doing code tasks
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+    }),
+  });
 
-    if (!userId) {
-      return NextResponse.json({
-        success: false,
-        message: "User not authenticated",
-      });
-    }
+  const data = await response.json();
 
-    
-    await connectDB();
-    const data = await Chat.findOne({ userId, _id: chatId });
-
-    
-    const userPrompt = {
-      role: "user",
-      content: prompt,
-      timestamp: Date.now(),
-    };
-
-    data.messages.push(userPrompt);
-
-    
-    const completion = await openai.chat.completions.create({
-      messages: [{ role: "user", content: prompt }],
-      model: "deepseek-chat",
-      store: true,
-    });
-
-    const message = completion.choices[0].message;
-    message.timestamp = Date.now();
-    data.messages.push(message);
-    data.save();
-
-    return NextResponse.json({ success: true, data: message });
-  } catch (error) {
-    return NextResponse.json({ success: false, error: error.message });
-  }
+  return new Response(
+    JSON.stringify({ response: data.choices?.[0]?.message?.content || "No response." }),
+    { status: 200 }
+  );
 }
